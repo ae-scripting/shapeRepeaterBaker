@@ -31,7 +31,9 @@ repBaker.buildGUI = function(thisObj){
 }
 
 repBaker.doit = function(_remove){
+	//Main script function
 	//_remove - remove or leave the repeater
+
 	var repeaterInstances = [{}]; //array for repeater(s)
 	function getRepeaterInstance(_arr){
 		//filter out selected properties
@@ -44,7 +46,6 @@ repBaker.doit = function(_remove){
 	}
 
 	function removeRepeater(_group, _name){
-		//alert(_layer.property("ADBE Root Vectors Group").numProperties)
 		var pr = _group;
         for(var k = pr.numProperties; k>0 ; k--){
             if(pr.property(k).name == _name){
