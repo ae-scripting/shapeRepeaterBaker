@@ -1,6 +1,13 @@
 ﻿// BakeRepeat - tool similar to Cinema 4D's "curret state object"
 // Creates copies of shape populated by Repeater modifier
 
+//v0.5 by Nik Ska, 2013
+
+//License
+//Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
+//You are free to use this code in your personal projects
+//as long as it's open source and not commercial.
+
 var repBaker = this;
 
 repBaker.buildGUI = function(thisObj){
@@ -162,7 +169,6 @@ repBaker.getRepeaterAttr = function(_property, repInstance){
 			else{
 				//set repeater instance's values
                 repInstance[_property.property(i).matchName] = _property.property(i).value;
-                //$.writeln(_property.property(i).matchName + ' ' + String(_property.property(i).value));
 			}
 		}
 	}
