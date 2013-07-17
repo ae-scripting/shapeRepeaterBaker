@@ -14,16 +14,16 @@ repBaker.buildGUI = function(thisObj){
 	thisObj.w = (thisObj instanceof Panel) ? thisObj : new Window("palette", thisObj.scriptTitle, undefined, {resizeable:true});
 	thisObj.w.alignChildren = ['left', 'top']
 	thisObj.w.minimumSize = "width: 150, height: 110";
-    thisObj.w.maximumSize = "width:150, height: 110";
+	thisObj.w.maximumSize = "width:150, height: 110";
 
 	thisObj.w.add("staticText", undefined, "Shape Repeater Baker");
 	var bakeit = thisObj.w.add("button", undefined, "Bake repeater");
 	bakeit.size = [120,20];
 
 	var lineTwo = thisObj.w.add("group{orientation:'row'}");
-    lineTwo.size = "width: 125, height: 25";
+	lineTwo.size = "width: 125, height: 25";
 
-    var removeRepeater =lineTwo.add("checkbox", undefined, "Remove repeater")
+	var removeRepeater =lineTwo.add("checkbox", undefined, "Remove repeater")
 
 
 	bakeit.onClick = function(){
@@ -31,10 +31,10 @@ repBaker.buildGUI = function(thisObj){
 	}
 
 	if (thisObj.w instanceof Window){
-    thisObj.w.center();
-    thisObj.w.show();
-  }
-  else thisObj.w.layout.layout(true);
+		thisObj.w.center();
+		thisObj.w.show();
+	}
+	else thisObj.w.layout.layout(true);
 }
 
 repBaker.doit = function(_remove){
