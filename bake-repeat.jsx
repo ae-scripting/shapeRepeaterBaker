@@ -130,7 +130,7 @@ repBaker.setAttrFromRepeater = function(_shape, _repeater, _num){
 		else{
 			//all the others
 			tr.property("ADBE Vector Position").setValue(tr.property("ADBE Vector Position").value +_repeater["ADBE Vector Repeater Position"]);
-			tr.property("ADBE Vector Scale").setValue([tr.property("ADBE Vector Scale").value[0]*(_repeater["ADBE Vector Repeater Scale"][0]/100), tr.property("ADBE Vector Scale").value[1]*(_repeater["ADBE Vector Repeater Scale"][1]/100)]);
+			tr.property("ADBE Vector Scale").setValue([tr.property("ADBE Vector Scale").value[0]*_repeater["ADBE Vector Repeater Scale"][0]/100, tr.property("ADBE Vector Scale").value[1]*_repeater["ADBE Vector Repeater Scale"][1]/100]);
 			tr.property("ADBE Vector Rotation").setValue(tr.property("ADBE Vector Rotation").value+_repeater["ADBE Vector Repeater Rotation"]);
 		}
 		tr.property("ADBE Vector Group Opacity").setValue(_repeater["ADBE Vector Repeater Opacity 1"] + (_num-offset)*(_repeater["ADBE Vector Repeater Opacity 2"]-_repeater["ADBE Vector Repeater Opacity 1"])/_repeater["ADBE Vector Repeater Copies"]);
