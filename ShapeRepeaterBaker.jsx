@@ -1,7 +1,9 @@
-﻿// BakeRepeat - tool similar to Cinema 4D's "curret state object"
+// BakeRepeat - tool similar to Cinema 4D's "curret state object"
 // Creates copies of shape populated by Repeater modifier
 
-//v0.5 by Nik Ska, 2013
+//v0.5 - Release
+//v0.51 - Bug fixes, offset is supported correctly
+//by Nik Ska, 2013
 
 //License
 //Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
@@ -66,7 +68,7 @@ repBaker.doit = function(_remove){
 		var pr = _group;
 		var move = _num;
 		for(var j = _num ; j > 0; j--){
-			pr.property(_num+1).moveTo(_num-j+1)
+			pr.property(_num).moveTo(_num-j+1)
 		}
 	}
 
@@ -108,7 +110,8 @@ repBaker.makeCopies =function(_obj, _repeater){
     var offset = Number(_repeater["ADBE Vector Repeater Offset"]);
 	for (var i = offset; i < numCopies+offset; i++) {
 		this.setAttrFromRepeater([tmp], _repeater, i);
-		tmp = tmp.duplicate();
+        
+        if(i<numCopies+offset-1) tmp = tmp.duplicate();
         
 	};
 }
@@ -122,10 +125,16 @@ repBaker.setAttrFromRepeater = function(_shape, _repeater, _num){
 	for(var k = 0 ; k < _shape.length ; k++){
 		var tr = _shape[k].property("ADBE Vector Transform Group");
 		var offset = Number(_repeater["ADBE Vector Repeater Offset"]);
+
 		if(_num == offset){
 			//moving first copy
 			tr.property("ADBE Vector Anchor").setValue(tr.property("ADBE Vector Anchor").value + _repeater["ADBE Vector Repeater Anchor"] - tr.property("ADBE Vector Position").value);
-			tr.property("ADBE Vector Position").setValue(_repeater["ADBE Vector Repeater Anchor"]);
+			tr.property("ADBE Vector Position").setValue(_repeater["ADBE Vector Repeater Anchor"]+offset*_repeater["ADBE Vector Repeater Position"]);
+
+			tr.property("ADBE Vector Scale").setValue([tr.property("ADBE Vector Scale").value[0]*Math.pow(_repeater["ADBE Vector Repeater Scale"][0]/100,offset), tr.property("ADBE Vector Scale").value[1]*Math.pow(_repeater["ADBE Vector Repeater Scale"][1]/100,offset)]);
+
+			tr.property("ADBE Vector Rotation").setValue(tr.property("ADBE Vector Rotation").value+offset*_repeater["ADBE Vector Repeater Rotation"]);
+
 		}
 		else{
 			//all the others
